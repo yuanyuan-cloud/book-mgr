@@ -1,31 +1,17 @@
+require('./Schemas/User')
 const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema({
-  nickname: String,
-  password: String,
-  age: Number,
-});
-
-const UserModal = mongoose.model('User', UserSchema);
-
 const connect = () => {
-  mongoose.connect('mongodb://127.0.0.1:27017/book-mgr');
+  return new Promise((resolve) => {
+    mongoose.connect('mongodb://127.0.0.1:27017/book-mgr');
 
   mongoose.connection.on('open', () => {
-    console.log('连接成功');
-
-    const user = new UserModal({
-      nickname: '小红',
-      password: '123456',
-      age: 12,
-    });
-
-    user.age = 99;
-
-    user.save();
+    console.log('连接数据库成功');
+    resolve();
   });
-
-  
+  })
 };
 
-connect();
+module.exports = {
+  connect,
+}

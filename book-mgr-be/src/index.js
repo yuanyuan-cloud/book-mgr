@@ -1,24 +1,25 @@
 const Koa = require('koa');
+const { koaBody } = require('koa-body')
+const { connect } = require('./db')
+const registerRoutes = require('./routers')
+const cors = require('@koa/cors')
 
 const app = new Koa();
 
-app.use(async (context, next) => {
-  const { request: req } = context;
-  const { url } = req;
+connect().then(() => {
+  app.use(cors())
+  app.use(koaBody())
 
-  if (url === '/') {
-    context.response.body = '<h1>主页</h1>';
-    return;
-  }
-
+  registerRoutes(app);
   
-
-})
+  
 
 // 开启一个 http 服务
 // 接收 http 请求 并做处理，处理完后响应
 app.listen(3000, () => {
   console.log('启动成功');
 }); 
+});
 
-console.log('112233');
+
+
