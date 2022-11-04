@@ -19,4 +19,6 @@ app.use(async (context, next) => {
 // 接收 http 请求 并做处理，处理完后响应
 app.listen(3000, () => {
   console.log('启动成功');
-});
+}); 
+
+console.log('112233');
