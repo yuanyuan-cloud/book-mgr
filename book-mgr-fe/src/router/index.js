@@ -9,7 +9,14 @@ const routes = [
   {
     path: '/',
     name: 'BasicLayout',
-    component: ()=>import(/* webpackChunkName: "auth" */'../layout/BasicLayout/index.vue')
+    component: () => import(/* webpackChunkName: "auth" */'../layout/BasicLayout/index.vue'),
+    children: [
+      {
+        path: 'books',
+        name: 'Books',
+        component: ()=>import('../views/Books/index.vue')
+      }
+    ],
   }
 ];
 
