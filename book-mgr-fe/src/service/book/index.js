@@ -1,4 +1,7 @@
 import axios from 'axios';
+import { getToken } from '@/helpers/token'
+
+axios.defaults.headers['Authorization']=`Bearer ${getToken()}`
 
 export const add = (form) => {
   return axios.post(
@@ -35,4 +38,11 @@ export const update = (data = {}) => {
     data
   )
 }
+
+export const detail = (id) => {
+  return axios.get(
+    `http://localhost:3000/book/detail/${id}`,
+  );
+};
+
 
